@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schwarzeis</title>
+  <style>
+    body {
+      font-family: monospace;
+      font-size: 26px;
+      text-align: center;
+      color: #f9f9f9;
+      background: #000000;
+    }
+    #separator {
+      white-space: pre;
+      word-wrap: break-word;
+      text-align: center;
+    }
+    h2 {
+        font-size: 4rem;
+        margin: 0px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Schwarzeis</h2>
+  <div id="separator"></div>
+  <p>Hier könnte Ihre Werbung stehen.</p>
+
+  <script>
+    function generateSeparator() {
+      const container = document.getElementById('separator');
+
+      // Estimate how many + signs fit across the screen based on character width
+      const charWidth = getCharWidth();
+      const screenWidth = window.innerWidth;
+      const count = Math.floor(screenWidth / charWidth);
+      container.textContent = '+'.repeat(count);
+    }
+
+    function getCharWidth() {
+      const span = document.createElement('span');
+      span.style.fontFamily = 'monospace';
+      span.style.fontSize = '27px';
+      span.style.visibility = 'hidden';
+      span.textContent = '+';
+      document.body.appendChild(span);
+      const width = span.getBoundingClientRect().width;
+      document.body.removeChild(span);
+      return width;
+    }
+
+    // Generate automatically on load and resize
+    window.addEventListener('load', generateSeparator);
+    window.addEventListener('resize', generateSeparator);
+  </script>
+</body>
+</html>
